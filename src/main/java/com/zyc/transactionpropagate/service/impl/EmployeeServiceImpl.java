@@ -20,20 +20,30 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 添加员工的同时添加部门
+     * 如果在外面将内部方法事务的异常catch住，会报只能回滚的错误，当前方法不能提交
      * @param name 员工姓名
      */
     @Override
-//    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public void addEmpByRequired(String name) {
         Employee employee = new Employee();
         employee.setDeptId(1);
         employee.setName(name);
         employee.setAddress("邯郸");
-        employeeMapper.insertSelective(employee);
-        departmentService.addDeptByRequired("jishubu");
+        try {
+            employeeMapper.insertSelective(employee);
+            departmentService.addDeptByRequired("jishubu");
+        }catch (Exception e){
+//            e.printStackTrace();
+        }
+
         int i = 1/0;
     }
 
+    /**
+     * 如果当前方法直接使用SUPPORTS，内部方法也是SUPPORTS，则整个都不存在事务
+     * @param name
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public void addEmpBySupports(String name) {

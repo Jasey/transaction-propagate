@@ -26,6 +26,7 @@ public class TransactionPropagateApplicationTests {
 	@Test
 	public void test0() {
 		employeeService.addEmpBySupports("laoer");
+		System.out.println("end supports");
 	}
 
 	@Test

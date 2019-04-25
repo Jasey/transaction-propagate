@@ -20,7 +20,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department department = new Department();
         department.setName(name);
         departmentMapper.insertSelective(department);
-        int i = 1/0;
+//        int i = 1/0;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department department = new Department();
         department.setName(name);
         departmentMapper.insertSelective(department);
-        int i = 1/0;
+//        int i = 1/0;
     }
 
     @Override
